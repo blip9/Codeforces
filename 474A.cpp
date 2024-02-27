@@ -8,12 +8,21 @@ using namespace std;
 int main(){
     char dir;
     cin>>dir;
-    string layout[3] = {"qwertyuiop","asdfghjkl;","zxcvbnm,./"};
-    string final;
-    string initial;
+    string layout;
+    string layouti="qwertyuiopasdfghjkl;zxcvbnm,./";
+    if(dir=='R'){
+        layout = " qwertyuiopasdfghjkl;zxcvbnm,./";
+    }else{
+        layout = "wertyuiopasdfghjkl;zxcvbnm,./ ";
+    }
+    
+    string initial ;
+    string final="";
     cin>>initial;
+    
     for(auto i:initial){
-        
+        int index = layouti.find(i);
+        final += layout[index];
     }
     cout<<final;
 
