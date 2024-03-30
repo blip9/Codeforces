@@ -8,29 +8,28 @@ using namespace std;
 int main(){
     int n,l;
     cin>>n>>l;
-    float fgap=0,gap=0;
     double lamps[n];
 
     for(int i=0;i<n;i++){
         cin>>lamps[i];
     }
-
     sort(lamps,lamps+n);
+    double first = lamps[0] - 0;
+    double last = l - lamps[n-1];
+    double greatest = 0;
+    
+    for(int i= 0;i<n-1;i++){
+        greatest = (lamps[i+1]-lamps[i])>greatest?(lamps[i+1]-lamps[i]):greatest;
 
-    if(lamps[0]!= 0){
-        fgap = lamps[0];
     }
-    if(lamps[n-1]!=l){
-        if(fgap<l-lamps[n-1]){
-            fgap = l-lamps[n-1];
-        }
+    if(first>greatest/2 && first>last){
+        cout<<first;
+        return 0;
+    }else if(last>greatest/2){
+        cout<<last;
+        return 0;
     }
-    for(int i=0;i<n-1;i++){
-        gap  = (lamps[i+1]-lamps[i])/(float)2;
-        if(gap>fgap){
-            fgap = gap;
-        }
-    }
-    printf("%f",fgap);
+    cout<<fixed<<setprecision(9)<<greatest/2;
+    
     return 0;
 }
