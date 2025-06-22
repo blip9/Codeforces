@@ -1,58 +1,61 @@
-#include<bits/stdc++.h>
-#define ll long long int
-#define ull unsigned long long int
-#define vi vector<int>
-#define loop(i,a,b) for(int i=a;i<b;i++)
-#define llvi vector<long long int>
+#include <bits/stdc++.h>
 using namespace std;
-class Node{
-    public:
-        int value;
-        Node* next;
 
-        Node(int value){
-            this->value = value;
-            this->next = NULL;
-        }
-        void insertE(int num){
-            Node* node = this;
-            if(node->next==NULL){
-                Node* temp = new Node(num);
-                node->next = temp;
-                temp->next = NULL;
-            }else{
-                node->next->insertE(num);
+#define ll long long
+#define pb push_back
+#define all(x) (x).begin(), (x).end()
+#define F first
+#define S second
+#define fast_io                       \
+    ios_base::sync_with_stdio(false); \
+    cin.tie(NULL);                    \
+    cout.tie(NULL);
+
+const int MOD = 1e9 + 7;
+const int INF = 1e18;
+
+void solve()
+{
+    // Write your solution here
+    int n;
+    cin >> n;
+    unordered_map<string, int> mp;
+    unordered_map<string, int> time;
+    int maxe = 0;
+    for (int i = 0; i < n; i++)
+    {
+        string str;
+        cin >> str;
+        int val;
+        cin >> val;
+        mp[str] += val;
+        maxe = max(mp[str], maxe);
+        time[str] = i;
+    }
+    string ans = "";
+    int lqt = INT_MAX;
+    for (auto i : mp)
+    {
+        if (i.second == maxe)
+        {
+            if (lqt > time[i.first])
+            {
+                lqt = time[i.first];
+                ans = i.first;
             }
-            
-            
         }
-        void insertB(int num){
-            Node* temp = new Node(this->value);
-            this->value = num;
-            temp->next = this->next;
-            this->next = temp;
-        }
-        void print(){
-            Node* node = this;
-            while(node->next!=NULL){
-                cout<<node->value<<"\t";
-                node = node->next;
-            }
-            cout<<node->value;
-        }
-};
-int main(){
-    Node head = Node(78);
-    head.insertE(77);
-    head.insertE(33);
-    head.insertE(65);
-    head.insertE(13);
-    head.insertB(19);
+    }
+    cout << ans << endl;
+}
 
-    head.print();
-
-
-
-    
+int main()
+{
+    fast_io;
+    int t = 1;
+    // cin >> t;
+    while (t--)
+    {
+        solve();
+    }
     return 0;
 }
